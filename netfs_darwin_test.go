@@ -147,9 +147,20 @@ func TestRealMountReturnsAndReleasesArray(t *testing.T) {
 
 func TestRealMountLocalFailures(t *testing.T) {
 	good := map[string]any{}
-	if _, _, err := realMount(request{url: "smb://[bad", open: good, mount: good}); !errors.Is(err, ErrBadURL) {
+	// Whether CFURL refuses a given string varies by macOS release, and a
+	// mount attempt on an accepted one can block on name resolution, so the
+	// refusal is simulated and NetFS must not be reached.
+	origURL, origMount := cfURLCreateWithString, netfsMountURLSync
+	defer func() { cfURLCreateWithString, netfsMountURLSync = origURL, origMount }()
+	cfURLCreateWithString = func(alloc, s, base uintptr) uintptr { return 0 }
+	netfsMountURLSync = func(_, _, _, _, _, _ uintptr, _ *uintptr) int32 {
+		t.Error("NetFS reached after CFURL refused the URL")
+		return 0
+	}
+	if _, _, err := realMount(request{url: "smb://h/s", open: good, mount: good}); !errors.Is(err, ErrBadURL) {
 		t.Errorf("CFURL refusal: %v", err)
 	}
+	cfURLCreateWithString = origURL
 	bad := map[string]any{"x": 1.5}
 	if _, _, err := realMount(request{url: "smb://h/s", open: bad, mount: good}); err == nil {
 		t.Error("bad open options accepted")

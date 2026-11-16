@@ -9,7 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"net/url"
-	"path/filepath"
+	"path"
 	"strings"
 )
 
@@ -144,7 +144,7 @@ func newRequest(u *url.URL, user, password string, opts Options) (request, error
 	if password != "" && user == "" {
 		return request{}, ErrPasswordWithoutUser
 	}
-	if opts.MountDir != "" && !filepath.IsAbs(opts.MountDir) {
+	if opts.MountDir != "" && !path.IsAbs(opts.MountDir) {
 		return request{}, ErrBadMountDir
 	}
 	return request{
@@ -220,10 +220,11 @@ func Mount(ctx context.Context, u *url.URL, user, password string, opts Options)
 // Unmount unmounts the volume mounted at mountpoint with unmount(2). It fails
 // with EBUSY while a file on the volume is open.
 func Unmount(mountpoint string) error {
-	if !filepath.IsAbs(mountpoint) {
+	// Slash paths: mountpoints are macOS paths whatever the host compiling this.
+	if !path.IsAbs(mountpoint) {
 		return ErrBadMountpoint
 	}
-	if err := unmountFn(filepath.Clean(mountpoint)); err != nil {
+	if err := unmountFn(path.Clean(mountpoint)); err != nil {
 		return fmt.Errorf("netfs: unmount %s: %w", mountpoint, err)
 	}
 	return nil
