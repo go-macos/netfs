@@ -5,7 +5,7 @@ go 1.27.4
 require (
 	github.com/ebitengine/purego v0.11.3
 	github.com/go-filesystems/interface v0.6.0
-	github.com/go-filesystems/smb v0.12.0
+	github.com/go-filesystems/smb v0.17.0
 	github.com/go-macos/objc v0.12.0
 )
 
