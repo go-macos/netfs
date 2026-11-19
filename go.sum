@@ -12,8 +12,8 @@ github.com/go-filesystems/inflight v0.2.0 h1:XN9rJkWSo51zDqx10VvQCvu8TG2t9t7v4Xv
 github.com/go-filesystems/inflight v0.2.0/go.mod h1:RA1/w2Hbza3HvTw+ZfABSw8lh6zmixEUPsulzbeaarA=
 github.com/go-filesystems/interface v0.6.0 h1:+7nA5FHgs/B03rZ9p81bkm0+6ew9fEntTFK8L5Uu6pk=
 github.com/go-filesystems/interface v0.6.0/go.mod h1:u9v8mvapNV8djzObwCECdyd2g6JBU6HNTR4EAqxOn6U=
-github.com/go-filesystems/smb v0.12.0 h1:sVy+OPKpSm53lc6YS+0uE20Ey+Yy3GaEbYyXu5/ZA38=
-github.com/go-filesystems/smb v0.12.0/go.mod h1:0tst9r4AXFO7lU29kKjDVi8wEl1hIOCwzexq90hmNBg=
+github.com/go-filesystems/smb v0.17.0 h1:E6WCaPG4+QQE5wYQQjfNLI7a6UuT0zYArdDbMvkDDho=
+github.com/go-filesystems/smb v0.17.0/go.mod h1:nsYaVqdziD72BvuVhiBUfQYDuNF70imXGJg1uMfKV70=
 github.com/go-macos/objc v0.12.0 h1:/WmB4C1CQd5RkqBRvnHNljEFtOTvytPA9fkD87xuJVQ=
 github.com/go-macos/objc v0.12.0/go.mod h1:ao+SmTFBrkZdP+488hFTrSFvCtJ36McKKhNNOlcFXrQ=
 github.com/hashicorp/go-uuid v1.0.3 h1:2gKiV6YVmrJ1i2CKKa9obLvRieoRGviZFL26PcT/Co8=
